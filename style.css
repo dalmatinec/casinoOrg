@@ -1,0 +1,189 @@
+/* Общие настройки */
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Видеофон */
+.video-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.8;
+}
+
+/* Обёртка для свайпа блоков */
+.page-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+/* Секции */
+.section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* Заголовок */
+.welcome h1 {
+  font-size: 2.8rem;
+  padding: 20px;
+  border-radius: 15px;
+  color: white;
+  text-shadow: 2px 2px 0 #000, 4px 4px 0 red;
+  border: 3px solid red;
+  box-shadow: 0 0 25px red;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.welcome p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  text-shadow: 0 0 10px black;
+}
+
+/* Кнопки */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+}
+.neon-button {
+  padding: 15px 35px;
+  font-size: 1.2rem;
+  border: 2px solid red;
+  border-radius: 50px;
+  background: #000;
+  color: white;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  animation: neonPulse 2s infinite;
+  transition: transform 0.3s;
+  text-decoration: none;
+}
+.neon-button:hover {
+  transform: scale(1.05);
+}
+@keyframes neonPulse {
+  0% {
+    box-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
+  }
+  50% {
+    box-shadow: 0 0 20px #ff0033, 0 0 30px #ff0033, 0 0 40px #ff0033;
+  }
+  100% {
+    box-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
+  }
+}
+
+/* Анимированные фишки 🎲 */
+.neon-button::before,
+.neon-button::after {
+  content: "🎲";
+  font-size: 1.5rem;
+  position: absolute;
+  animation: spin-cube 3s linear infinite;
+  color: gold;
+  text-shadow: 0 0 5px gold, 0 0 10px red;
+}
+.neon-button::before {
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.neon-button::after {
+  right: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+@keyframes spin-cube {
+  0%   { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Кнопка перехода */
+.scroll-down {
+  margin: 10px 0 0;
+  display: inline-block;
+  color: gold;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.2rem;
+  animation: blink 2s infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Переключатель языка */
+.lang-toggle {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 1000;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #777;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background-color: red;
+}
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+#lang-label-left,
+#lang-label-right {
+  color: white;
+  font-weight: bold;
+}

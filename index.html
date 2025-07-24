@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CASINO.ORG</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Языковой переключатель -->
+  <div class="lang-toggle">
+    <span id="lang-label-left">RU</span>
+    <label class="switch">
+      <input type="checkbox" id="languageSwitch" />
+      <span class="slider round"></span>
+    </label>
+    <span id="lang-label-right">KZ</span>
+  </div>
+
+  <!-- Видеофон -->
+  <video class="video-bg" autoplay muted loop playsinline>
+    <source src="casino.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Обёртка для скролл-блоков -->
+  <div class="page-container">
+
+    <!-- БЛОК 1 -->
+    <section class="section welcome" id="welcome">
+      <div class="overlay">
+        <h1 id="main-title">Добро пожаловать в магазин CASINO.ORG</h1>
+        <p id="sub-title">Топовые товары по Казахстану</p>
+        <p id="cities">Астана, Алматы, Караганда, Павлодар, Кокшетау, Семей, Тараз, Актобе</p>
+        <a href="#buttons" class="scroll-down">Перейти к ссылкам ↓</a>
+      </div>
+    </section>
+
+    <!-- БЛОК 2 -->
+    <section class="section buttons-section" id="buttons">
+      <div class="buttons">
+        <a href="https://t.me/BIG_BROKz" class="neon-button">Оператор</a>
+        <a href="https://t.me/BIG_BROKz" class="neon-button">Наш чат</a>
+        <a href="https://t.me/BIG_BROKz" class="neon-button">Наш канал</a>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
