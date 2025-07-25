@@ -8,7 +8,9 @@
 </head>
 <body>
 
-  <!-- Языковой переключатель -->
+  <div class="coin-animation"></div>
+  <div class="smoke-animation"></div>
+
   <div class="lang-toggle">
     <span id="lang-label-left">RU</span>
     <label class="switch">
@@ -18,12 +20,10 @@
     <span id="lang-label-right">KZ</span>
   </div>
 
-  <!-- Видеофон -->
   <video class="video-bg" autoplay muted loop playsinline>
     <source src="casino.mp4" type="video/mp4" />
   </video>
 
-  <!-- Меню-бургер -->
   <div class="burger-menu" id="burger">&#9776;</div>
   <nav class="sidebar" id="sidebar">
     <span class="close-btn" id="closeSidebar">&times;</span>
@@ -35,10 +35,8 @@
     </ul>
   </nav>
 
-  <!-- Обёртка для скролл-блоков -->
   <div class="page-container">
 
-    <!-- БЛОК 1 -->
     <section class="section welcome" id="welcome">
       <div class="overlay">
         <h1 id="main-title">Добро пожаловать в магазин CASINO.ORG</h1>
@@ -48,16 +46,14 @@
       </div>
     </section>
 
-    <!-- БЛОК 2 -->
     <section class="section buttons-section" id="buttons">
       <div class="buttons">
-        <a href="https://t.me/your_operator_link" class="neon-button">Оператор</a>
-        <a href="https://t.me/your_chat_link" class="neon-button">Наш чат</a>
-        <a href="https://t.me/your_channel_link" class="neon-button">Наш канал</a>
+        <a href="https://t.me/your_operator_link" class="neon-button" data-link="operator">Оператор</a>
+        <a href="https://t.me/your_chat_link" class="neon-button" data-link="chat">Наш чат</a>
+        <a href="https://t.me/your_channel_link" class="neon-button" data-link="channel">Наш канал</a>
       </div>
     </section>
 
-    <!-- FAQ -->
     <section class="section" id="faq">
       <div class="faq-item">
         <h3>Кто мы?</h3>
@@ -69,7 +65,6 @@
       </div>
     </section>
 
-    <!-- ОТЗЫВЫ -->
     <section class="section" id="reviews">
       <h2>Отзывы</h2>
       <form id="reviewForm">
@@ -89,50 +84,6 @@
 
   </div>
 
-  <!-- Firebase SDK -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-    import { getDatabase, ref, push, onValue, limitToLast, query } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyBrLNZv3CgCeGyNAgENLEGFf70aWJDm4Ik",
-      authDomain: "casino-org.firebaseapp.com",
-      databaseURL: "https://casino-org-default-rtdb.europe-west1.firebasedatabase.app",
-      projectId: "casino-org",
-      storageBucket: "casino-org.firebasestorage.app",
-      messagingSenderId: "1028536859715",
-      appId: "1:1028536859715:web:be40dfc23130a5b347a8f6"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    const reviewsRef = ref(db, 'reviews');
-
-    document.getElementById("reviewForm").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = document.getElementById("username").value || "Аноним";
-      const msg = document.getElementById("message").value;
-      const stars = document.getElementById("rating").value;
-      push(reviewsRef, { name, msg, stars, time: Date.now() });
-      alert("Спасибо за отзыв!");
-      e.target.reset();
-    });
-
-    const list = document.getElementById("reviewList");
-    const q = query(reviewsRef, limitToLast(10));
-    onValue(q, (snapshot) => {
-      list.innerHTML = '';
-      const reviews = [];
-      snapshot.forEach(child => reviews.push(child.val()));
-      reviews.reverse().forEach(r => {
-        const div = document.createElement("div");
-        div.className = "review-item";
-        div.innerHTML = `<strong>${r.name}</strong> <div class="stars">${'⭐'.repeat(r.stars)}</div><p>${r.msg}</p>`;
-        list.appendChild(div);
-      });
-    });
-  </script>
-
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
