@@ -1,52 +1,53 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CASINO.ORG</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="script.js"></script>
 </head>
 <body>
+  <section class="hero">
+    <div class="language-switch">
+      <span>RU</span>
+      <label class="switch">
+        <input type="checkbox" id="langToggle">
+        <span class="slider"></span>
+      </label>
+      <span>KZ</span>
+    </div>
+    <div class="welcome-text">
+      <h1>Добро пожаловать в магазин<br>CASINO.ORG</h1>
+      <p>Топовые товары по Казахстану</p>
+      <p>Астана, Алматы, Караганда, Павлодар,<br>Кокшетау, Семей, Тараз, Актобе</p>
+      <a href="#links">Перейти к ссылкам ↓</a>
+    </div>
+  </section>
 
-  <!-- Языковой переключатель -->
-  <div class="lang-toggle">
-    <span id="lang-label-left">RU</span>
-    <label class="switch">
-      <input type="checkbox" id="languageSwitch" />
-      <span class="slider round"></span>
-    </label>
-    <span id="lang-label-right">KZ</span>
-  </div>
+  <section class="links" id="links">
+    <div class="button-container">
+      <a href="https://t.me/operator" target="_blank">ОПЕРАТОР</a>
+      <a href="https://t.me/chat" target="_blank">НАШ ЧАТ</a>
+      <a href="https://t.me/channel" target="_blank">НАШ КАНАЛ</a>
+    </div>
+  </section>
 
-  <!-- Видеофон -->
-  <video class="video-bg" autoplay muted loop playsinline>
-    <source src="casino.mp4" type="video/mp4" />
-  </video>
-
-  <!-- Обёртка для скролл-блоков -->
-  <div class="page-container">
-
-    <!-- БЛОК 1 -->
-    <section class="section welcome" id="welcome">
-      <div class="overlay">
-        <h1 id="main-title">Добро пожаловать в магазин CASINO.ORG</h1>
-        <p id="sub-title">Топовые товары по Казахстану</p>
-        <p id="cities">Астана, Алматы, Караганда, Павлодар, Кокшетау, Семей, Тараз, Актобе</p>
-        <a href="#buttons" class="scroll-down">Перейти к ссылкам ↓</a>
-      </div>
-    </section>
-
-    <!-- БЛОК 2 -->
-    <section class="section buttons-section" id="buttons">
-      <div class="buttons">
-        <a href="https://t.me/BIG_BROKz" class="neon-button">Оператор</a>
-        <a href="https://t.me/BIG_BROKz" class="neon-button">Наш чат</a>
-        <a href="https://t.me/BIG_BROKz" class="neon-button">Наш канал</a>
-      </div>
-    </section>
-
-  </div>
-
-  <script src="script.js"></script>
+  <section class="reviews" id="reviews">
+    <h2>Отзывы</h2>
+    <form id="reviewForm">
+      <input type="text" id="username" placeholder="Ваше имя (необязательно)">
+      <textarea id="message" placeholder="Ваш отзыв..." required></textarea>
+      <select id="rating">
+        <option value="5">5 звёзд</option>
+        <option value="4">4 звезды</option>
+        <option value="3">3 звезды</option>
+        <option value="2">2 звезды</option>
+        <option value="1">1 звезда</option>
+      </select>
+      <button type="submit">Оставить отзыв</button>
+    </form>
+    <div id="reviewList"></div>
+  </section>
 </body>
 </html>
