@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CASINO.ORG</title>
   <link rel="stylesheet" href="style.css">
+  <script defer src="app.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
 </head>
 <body>
   <section class="hero" id="home">
@@ -60,61 +63,6 @@
     </form>
     <div id="reviewList"></div>
   </section>
-
-  <!-- Firebase SDK + Инициализация -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyBrLNZv3CgCeGyNAgENLEGFf70aWJDm4Ik",
-      authDomain: "casino-org.firebaseapp.com",
-      databaseURL: "https://casino-org-default-rtdb.europe-west1.firebasedatabase.app",
-      projectId: "casino-org",
-      storageBucket: "casino-org.firebasestorage.app",
-      messagingSenderId: "1028536859715",
-      appId: "1:1028536859715:web:be40dfc23130a5b347a8f6"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    // Загрузка отзывов
-    const reviewList = document.getElementById("reviewList");
-    const reviewForm = document.getElementById("reviewForm");
-
-    reviewForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const username = document.getElementById("username").value || "Аноним";
-      const message = document.getElementById("message").value;
-      const rating = document.getElementById("rating").value;
-
-      const reviewRef = ref(db, "reviews");
-      push(reviewRef, {
-        username,
-        message,
-        rating,
-        date: Date.now()
-      });
-
-      reviewForm.reset();
-    });
-
-    const reviewRef = ref(db, "reviews");
-    onValue(reviewRef, (snapshot) => {
-      const data = snapshot.val();
-      const reviews = data ? Object.values(data) : [];
-
-      // Показать последние 10 отзывов
-      const last10 = reviews.sort((a, b) => b.date - a.date).slice(0, 10);
-
-      reviewList.innerHTML = last10.map((r) => `
-        <div class="review">
-          <strong>${r.username}</strong> — ⭐ ${r.rating}<br>
-          ${r.message}
-        </div>
-      `).join("");
-    });
-  </script>
 </body>
 </html>
+ив скинь 
