@@ -1,16 +1,18 @@
+/* Общие стили */
 * {
   box-sizing: border-box;
 }
-html {
-  scroll-behavior: smooth;
-}
-body {
+body, html {
   margin: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #000;
-  color: #fff;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: black;
+  color: white;
+  scroll-behavior: smooth;
   overflow: hidden;
 }
+
+/* Видеофон */
 .video-bg {
   position: fixed;
   top: 0; left: 0;
@@ -20,84 +22,103 @@ body {
   z-index: -2;
   opacity: 0.7;
 }
+
+/* Монеты */
+.coin-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+.coin-container::before {
+  content: "💰 💰 💰 💰 💰 💰 💰";
+  display: block;
+  font-size: 2rem;
+  animation: fall 5s linear infinite;
+}
+@keyframes fall {
+  0% { transform: translateY(-100px); opacity: 0; }
+  100% { transform: translateY(100vh); opacity: 1; }
+}
+
+/* Дым */
+.smoke-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0;
+  background: radial-gradient(rgba(255,255,255,0.05), transparent 70%);
+  animation: smoke 10s infinite alternate;
+  z-index: -1;
+}
+@keyframes smoke {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(20px, -20px); }
+}
+
+/* Скроллинг по секциям */
 .page-container {
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
   height: 100vh;
 }
+
+/* Секции */
 .section {
   scroll-snap-align: start;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding: 40px 20px;
   text-align: center;
 }
+
+/* Заголовки */
 .welcome h1 {
-  font-size: 2.8rem;
-  padding: 20px;
-  border-radius: 15px;
-  color: white;
-  text-shadow: 2px 2px 0 #000, 4px 4px 0 red;
-  border: 3px solid red;
-  box-shadow: 0 0 25px red;
-  background-color: rgba(0, 0, 0, 0.6);
+  font-size: 2.5rem;
+  text-shadow: 0 0 10px red;
 }
 .welcome p {
   font-size: 1.2rem;
-  margin: 10px 0;
-  text-shadow: 0 0 10px black;
 }
+
+/* Кнопки */
 .buttons {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
   align-items: center;
 }
 .neon-button {
   padding: 15px 35px;
-  font-size: 1.2rem;
   border: 2px solid red;
-  border-radius: 50px;
-  background: #000;
+  border-radius: 30px;
+  background: transparent;
   color: white;
-  cursor: pointer;
-  position: relative;
-  animation: neonPulse 2s infinite;
-  text-decoration: none;
-}
-@keyframes neonPulse {
-  0% { box-shadow: 0 0 10px red; }
-  50% { box-shadow: 0 0 20px #ff0033; }
-  100% { box-shadow: 0 0 10px red; }
-}
-.scroll-down {
-  margin-top: 20px;
-  color: gold;
   font-weight: bold;
+  text-transform: uppercase;
+  animation: pulse 2s infinite;
   text-decoration: none;
-  font-size: 1.2rem;
-  animation: blink 2s infinite;
 }
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 10px red; }
+  50% { box-shadow: 0 0 20px red; }
 }
+
+/* Переключатель языка */
 .lang-toggle {
   position: fixed;
-  top: 15px;
-  right: 20px;
+  top: 10px;
+  right: 15px;
   display: flex;
-  align-items: center;
   gap: 10px;
-  z-index: 1000;
+  z-index: 999;
 }
 .switch {
+  position: relative;
+  display: inline-block;
   width: 50px;
   height: 24px;
-  position: relative;
 }
 .switch input {
   opacity: 0;
@@ -108,8 +129,8 @@ body {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   background-color: #777;
-  transition: 0.4s;
   border-radius: 24px;
+  transition: 0.4s;
 }
 .slider:before {
   content: "";
@@ -119,8 +140,8 @@ body {
   left: 3px;
   bottom: 3px;
   background-color: white;
-  transition: 0.4s;
   border-radius: 50%;
+  transition: 0.4s;
 }
 input:checked + .slider {
   background-color: red;
@@ -128,70 +149,25 @@ input:checked + .slider {
 input:checked + .slider:before {
   transform: translateX(26px);
 }
-.burger-menu {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  font-size: 2rem;
-  color: gold;
-  cursor: pointer;
-  z-index: 1000;
-}
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: -250px;
-  width: 220px;
-  height: 100%;
-  background: rgba(0,0,0,0.95);
-  padding: 30px 20px;
-  z-index: 999;
-  transition: left 0.3s ease;
-}
-.sidebar.active {
-  left: 0;
-}
-.sidebar .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 2rem;
-  cursor: pointer;
-  color: red;
-}
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-.sidebar li {
-  margin: 20px 0;
-}
-.sidebar a {
-  color: gold;
-  text-decoration: none;
-  font-size: 1.1rem;
-}
-.coin-animation {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-  background: url('coins.gif') repeat;
-  opacity: 0.1;
-}
-.smoke-animation {
+
+/* Нижнее меню */
+.bottom-menu {
   position: fixed;
   bottom: 0;
-  left: 0;
   width: 100%;
-  height: 200px;
-  background: url('smoke.gif') repeat-x;
-  z-index: -1;
-  opacity: 0.15;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  z-index: 998;
 }
+.bottom-menu a {
+  color: gold;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Отзывы */
 #reviewForm {
   display: flex;
   flex-direction: column;
