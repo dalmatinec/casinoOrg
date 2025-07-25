@@ -1,4 +1,3 @@
-/* Базовые стили */
 body {
   margin: 0;
   font-family: sans-serif;
@@ -82,7 +81,7 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-/* Кнопки-ссылки */
+/* Кнопки */
 .button-container {
   display: flex;
   flex-direction: column;
@@ -103,7 +102,7 @@ input:checked + .slider:before {
   background: #e67e22;
 }
 
-/* Блок FAQ */
+/* FAQ */
 .faq {
   padding: 40px 20px;
   background: #1c1c1c;
@@ -121,7 +120,7 @@ input:checked + .slider:before {
   color: #f39c12;
 }
 
-/* Блок отзывов */
+/* Отзывы */
 .reviews {
   padding: 40px 20px;
   background: #111;
