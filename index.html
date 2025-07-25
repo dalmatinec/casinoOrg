@@ -8,9 +8,7 @@
 </head>
 <body>
 
-  <div class="coin-animation"></div>
-  <div class="smoke-animation"></div>
-
+  <!-- Языковой переключатель -->
   <div class="lang-toggle">
     <span id="lang-label-left">RU</span>
     <label class="switch">
@@ -20,52 +18,49 @@
     <span id="lang-label-right">KZ</span>
   </div>
 
+  <!-- Видеофон -->
   <video class="video-bg" autoplay muted loop playsinline>
     <source src="casino.mp4" type="video/mp4" />
   </video>
 
-  <div class="burger-menu" id="burger">&#9776;</div>
-  <nav class="sidebar" id="sidebar">
-    <span class="close-btn" id="closeSidebar">&times;</span>
-    <ul>
-      <li><a href="#welcome">Главная</a></li>
-      <li><a href="#buttons">Наши ссылки</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#reviews">Отзывы</a></li>
-    </ul>
-  </nav>
+  <!-- Падающие монеты и дым -->
+  <div class="coin-container"></div>
+  <div class="smoke-overlay"></div>
 
+  <!-- Скролл-блоки -->
   <div class="page-container">
-
+    <!-- БЛОК 1 -->
     <section class="section welcome" id="welcome">
-      <div class="overlay">
-        <h1 id="main-title">Добро пожаловать в магазин CASINO.ORG</h1>
-        <p id="sub-title">Топовые товары по Казахстану</p>
-        <p id="cities">Астана, Алматы, Караганда, Павлодар, Кокшетау, Семей, Тараз, Актобе</p>
-        <a href="#buttons" class="scroll-down">Перейти к ссылкам ↓</a>
-      </div>
+      <h1 id="main-title">Добро пожаловать в магазин CASINO.ORG</h1>
+      <p id="sub-title">Топовые товары по Казахстану</p>
+      <p id="cities">Астана, Алматы, Караганда, Павлодар, Кокшетау, Семей, Тараз, Актобе</p>
+      <a href="#buttons" class="scroll-down">Перейти к ссылкам ↓</a>
     </section>
 
+    <!-- БЛОК 2 -->
     <section class="section buttons-section" id="buttons">
       <div class="buttons">
-        <a href="https://t.me/your_operator_link" class="neon-button" data-link="operator">Оператор</a>
-        <a href="https://t.me/your_chat_link" class="neon-button" data-link="chat">Наш чат</a>
-        <a href="https://t.me/your_channel_link" class="neon-button" data-link="channel">Наш канал</a>
+        <a href="https://t.me/your_operator_link" class="neon-button link-btn">Оператор</a>
+        <a href="https://t.me/your_chat_link" class="neon-button link-btn">Наш чат</a>
+        <a href="https://t.me/your_channel_link" class="neon-button link-btn">Наш канал</a>
       </div>
     </section>
 
-    <section class="section" id="faq">
+    <!-- БЛОК 3 - FAQ -->
+    <section class="section faq" id="faq">
+      <h2>Часто задаваемые вопросы</h2>
       <div class="faq-item">
         <h3>Кто мы?</h3>
         <p>Мы — органический магазин по продаже качественных товаров по всему Казахстану. Работаем без посредников, доставляем напрямую от поставщика. Надёжность и честность — наш приоритет.</p>
       </div>
       <div class="faq-item">
         <h3>Оплата криптовалютой</h3>
-        <p>Вы можете оплатить через криптовалюты — USDT, BTC, TON и др. Напишите оператору, получите кошелёк и скидку 10% при оплате криптой.</p>
+        <p>Вы можете оплатить через популярные криптовалюты — USDT, Bitcoin, Toncoin и другие. После выбора товара, свяжитесь с оператором и получите кошелёк для оплаты. Оплачивая криптой — вы получаете скидку 10% на весь заказ!</p>
       </div>
     </section>
 
-    <section class="section" id="reviews">
+    <!-- БЛОК 4 - Отзывы -->
+    <section class="section reviews" id="reviews">
       <h2>Отзывы</h2>
       <form id="reviewForm">
         <input type="text" id="username" placeholder="Ваше имя (необязательно)">
@@ -81,8 +76,15 @@
       </form>
       <div id="reviewList"></div>
     </section>
-
   </div>
+
+  <!-- Нижнее фиксированное меню -->
+  <nav class="bottom-menu">
+    <a href="#welcome">Главная</a>
+    <a href="#buttons">Ссылки</a>
+    <a href="#faq">FAQ</a>
+    <a href="#reviews">Отзывы</a>
+  </nav>
 
   <script type="module" src="script.js"></script>
 </body>
