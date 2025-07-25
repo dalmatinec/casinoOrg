@@ -1,4 +1,3 @@
-/* Общие настройки */
 * {
   box-sizing: border-box;
 }
@@ -12,30 +11,23 @@ body {
   color: #fff;
   overflow: hidden;
 }
-
-/* Видеофон */
 .video-bg {
   position: fixed;
   top: 0; left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -1;
-  opacity: 0.8;
+  z-index: -2;
+  opacity: 0.7;
 }
-
-/* Обёртка для свайпа блоков */
 .page-container {
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
   height: 100vh;
 }
-
-/* Секции */
 .section {
   scroll-snap-align: start;
   min-height: 100vh;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -43,8 +35,6 @@ body {
   padding: 40px 20px;
   text-align: center;
 }
-
-/* Заголовок */
 .welcome h1 {
   font-size: 2.8rem;
   padding: 20px;
@@ -60,8 +50,6 @@ body {
   margin: 10px 0;
   text-shadow: 0 0 10px black;
 }
-
-/* Кнопки */
 .buttons {
   display: flex;
   flex-direction: column;
@@ -75,57 +63,18 @@ body {
   border-radius: 50px;
   background: #000;
   color: white;
-  text-transform: uppercase;
   cursor: pointer;
   position: relative;
   animation: neonPulse 2s infinite;
-  transition: transform 0.3s;
   text-decoration: none;
 }
-.neon-button:hover {
-  transform: scale(1.05);
-}
 @keyframes neonPulse {
-  0% {
-    box-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
-  }
-  50% {
-    box-shadow: 0 0 20px #ff0033, 0 0 30px #ff0033, 0 0 40px #ff0033;
-  }
-  100% {
-    box-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
-  }
+  0% { box-shadow: 0 0 10px red; }
+  50% { box-shadow: 0 0 20px #ff0033; }
+  100% { box-shadow: 0 0 10px red; }
 }
-
-/* Анимированные фишки 🎲 */
-.neon-button::before,
-.neon-button::after {
-  content: "🎲";
-  font-size: 1.5rem;
-  position: absolute;
-  animation: spin-cube 3s linear infinite;
-  color: gold;
-  text-shadow: 0 0 5px gold, 0 0 10px red;
-}
-.neon-button::before {
-  left: -30px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.neon-button::after {
-  right: -30px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-@keyframes spin-cube {
-  0%   { transform: translateY(-50%) rotate(0deg); }
-  100% { transform: translateY(-50%) rotate(360deg); }
-}
-
-/* Кнопка перехода */
 .scroll-down {
-  margin: 10px 0 0;
-  display: inline-block;
+  margin-top: 20px;
   color: gold;
   font-weight: bold;
   text-decoration: none;
@@ -136,8 +85,6 @@ body {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.3; }
 }
-
-/* Переключатель языка */
 .lang-toggle {
   position: fixed;
   top: 15px;
@@ -148,10 +95,9 @@ body {
   z-index: 1000;
 }
 .switch {
-  position: relative;
-  display: inline-block;
   width: 50px;
   height: 24px;
+  position: relative;
 }
 .switch input {
   opacity: 0;
@@ -182,38 +128,70 @@ input:checked + .slider {
 input:checked + .slider:before {
   transform: translateX(26px);
 }
-#lang-label-left,
-#lang-label-right {
-  color: white;
-  font-weight: bold;
+.burger-menu {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 2rem;
+  color: gold;
+  cursor: pointer;
+  z-index: 1000;
 }
-
-/* Боковое меню */
 .sidebar {
   position: fixed;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
+  top: 0;
+  left: -250px;
+  width: 220px;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  padding: 30px 20px;
   z-index: 999;
+  transition: left 0.3s ease;
+}
+.sidebar.active {
+  left: 0;
+}
+.sidebar .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: red;
 }
 .sidebar ul {
   list-style: none;
   padding: 0;
 }
 .sidebar li {
-  margin: 15px 0;
+  margin: 20px 0;
 }
 .sidebar a {
   color: gold;
   text-decoration: none;
-  font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
-.sidebar a:hover {
-  text-decoration: underline;
+.coin-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  background: url('coins.gif') repeat;
+  opacity: 0.1;
 }
-
-/* Отзывы */
+.smoke-animation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: url('smoke.gif') repeat-x;
+  z-index: -1;
+  opacity: 0.15;
+}
 #reviewForm {
   display: flex;
   flex-direction: column;
