@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CASINO.ORG</title>
   <link rel="stylesheet" href="style.css">
-  <script type="module" src="script.js"></script>
 </head>
 <body>
-  <section class="hero">
+  <section class="hero" id="home">
     <div class="language-switch">
       <span>RU</span>
       <label class="switch">
@@ -33,6 +32,18 @@
     </div>
   </section>
 
+  <section class="faq" id="faq">
+    <h2>Часто задаваемые вопросы</h2>
+    <div class="faq-item">
+      <h3>Кто мы?</h3>
+      <p>Мы — органический магазин по продаже качественных товаров по всему Казахстану. Работаем без посредников, доставляем напрямую от поставщика. Надёжность и честность — наш приоритет.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Оплата криптовалютой</h3>
+      <p>Вы можете оплатить через популярные криптовалюты — USDT, Bitcoin, Toncoin и другие. После выбора товара, свяжитесь с оператором и получите кошелёк для оплаты. Оплачивая криптой — вы получаете скидку 10% на весь заказ!</p>
+    </div>
+  </section>
+
   <section class="reviews" id="reviews">
     <h2>Отзывы</h2>
     <form id="reviewForm">
@@ -49,5 +60,61 @@
     </form>
     <div id="reviewList"></div>
   </section>
+
+  <!-- Firebase SDK + Инициализация -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBrLNZv3CgCeGyNAgENLEGFf70aWJDm4Ik",
+      authDomain: "casino-org.firebaseapp.com",
+      databaseURL: "https://casino-org-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "casino-org",
+      storageBucket: "casino-org.firebasestorage.app",
+      messagingSenderId: "1028536859715",
+      appId: "1:1028536859715:web:be40dfc23130a5b347a8f6"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Загрузка отзывов
+    const reviewList = document.getElementById("reviewList");
+    const reviewForm = document.getElementById("reviewForm");
+
+    reviewForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const username = document.getElementById("username").value || "Аноним";
+      const message = document.getElementById("message").value;
+      const rating = document.getElementById("rating").value;
+
+      const reviewRef = ref(db, "reviews");
+      push(reviewRef, {
+        username,
+        message,
+        rating,
+        date: Date.now()
+      });
+
+      reviewForm.reset();
+    });
+
+    const reviewRef = ref(db, "reviews");
+    onValue(reviewRef, (snapshot) => {
+      const data = snapshot.val();
+      const reviews = data ? Object.values(data) : [];
+
+      // Показать последние 10 отзывов
+      const last10 = reviews.sort((a, b) => b.date - a.date).slice(0, 10);
+
+      reviewList.innerHTML = last10.map((r) => `
+        <div class="review">
+          <strong>${r.username}</strong> — ⭐ ${r.rating}<br>
+          ${r.message}
+        </div>
+      `).join("");
+    });
+  </script>
 </body>
 </html>
