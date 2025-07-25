@@ -23,11 +23,13 @@
     <source src="casino.mp4" type="video/mp4" />
   </video>
 
-  <!-- Боковое меню -->
-  <nav class="sidebar">
+  <!-- Меню-бургер -->
+  <div class="burger-menu" id="burger">&#9776;</div>
+  <nav class="sidebar" id="sidebar">
+    <span class="close-btn" id="closeSidebar">&times;</span>
     <ul>
       <li><a href="#welcome">Главная</a></li>
-      <li><a href="#buttons">Ссылки</a></li>
+      <li><a href="#buttons">Наши ссылки</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#reviews">Отзывы</a></li>
     </ul>
@@ -55,7 +57,7 @@
       </div>
     </section>
 
-    <!-- БЛОК 3: FAQ -->
+    <!-- FAQ -->
     <section class="section" id="faq">
       <div class="faq-item">
         <h3>Кто мы?</h3>
@@ -63,11 +65,11 @@
       </div>
       <div class="faq-item">
         <h3>Оплата криптовалютой</h3>
-        <p>Вы можете оплатить через популярные криптовалюты — USDT, Bitcoin, Toncoin и другие. После выбора товара, свяжитесь с оператором и получите кошелёк для оплаты. Оплачивая криптой — вы получаете скидку 10% на весь заказ!</p>
+        <p>Вы можете оплатить через криптовалюты — USDT, BTC, TON и др. Напишите оператору, получите кошелёк и скидку 10% при оплате криптой.</p>
       </div>
     </section>
 
-    <!-- БЛОК 4: отзывы -->
+    <!-- ОТЗЫВЫ -->
     <section class="section" id="reviews">
       <h2>Отзывы</h2>
       <form id="reviewForm">
@@ -84,8 +86,53 @@
       </form>
       <div id="reviewList"></div>
     </section>
+
   </div>
 
-  <script src="script.js" type="module"></script>
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getDatabase, ref, push, onValue, limitToLast, query } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBrLNZv3CgCeGyNAgENLEGFf70aWJDm4Ik",
+      authDomain: "casino-org.firebaseapp.com",
+      databaseURL: "https://casino-org-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "casino-org",
+      storageBucket: "casino-org.firebasestorage.app",
+      messagingSenderId: "1028536859715",
+      appId: "1:1028536859715:web:be40dfc23130a5b347a8f6"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const reviewsRef = ref(db, 'reviews');
+
+    document.getElementById("reviewForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("username").value || "Аноним";
+      const msg = document.getElementById("message").value;
+      const stars = document.getElementById("rating").value;
+      push(reviewsRef, { name, msg, stars, time: Date.now() });
+      alert("Спасибо за отзыв!");
+      e.target.reset();
+    });
+
+    const list = document.getElementById("reviewList");
+    const q = query(reviewsRef, limitToLast(10));
+    onValue(q, (snapshot) => {
+      list.innerHTML = '';
+      const reviews = [];
+      snapshot.forEach(child => reviews.push(child.val()));
+      reviews.reverse().forEach(r => {
+        const div = document.createElement("div");
+        div.className = "review-item";
+        div.innerHTML = `<strong>${r.name}</strong> <div class="stars">${'⭐'.repeat(r.stars)}</div><p>${r.msg}</p>`;
+        list.appendChild(div);
+      });
+    });
+  </script>
+
+  <script src="script.js"></script>
 </body>
 </html>
