@@ -26,7 +26,8 @@
   <!-- Боковое меню -->
   <nav class="sidebar">
     <ul>
-      <li><a href="#buttons">Наши ссылки</a></li>
+      <li><a href="#welcome">Главная</a></li>
+      <li><a href="#buttons">Ссылки</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#reviews">Отзывы</a></li>
     </ul>
@@ -48,15 +49,14 @@
     <!-- БЛОК 2 -->
     <section class="section buttons-section" id="buttons">
       <div class="buttons">
-        <a href="https://t.me/your_operator_link" class="neon-button" id="operatorBtn">Оператор</a>
-        <a href="https://t.me/your_chat_link" class="neon-button" id="chatBtn">Наш чат</a>
-        <a href="https://t.me/your_channel_link" class="neon-button" id="channelBtn">Наш канал</a>
+        <a href="https://t.me/your_operator_link" class="neon-button">Оператор</a>
+        <a href="https://t.me/your_chat_link" class="neon-button">Наш чат</a>
+        <a href="https://t.me/your_channel_link" class="neon-button">Наш канал</a>
       </div>
     </section>
 
-    <!-- FAQ -->
+    <!-- БЛОК 3: FAQ -->
     <section class="section" id="faq">
-      <h2>FAQ</h2>
       <div class="faq-item">
         <h3>Кто мы?</h3>
         <p>Мы — органический магазин по продаже качественных товаров по всему Казахстану. Работаем без посредников, доставляем напрямую от поставщика. Надёжность и честность — наш приоритет.</p>
@@ -67,7 +67,7 @@
       </div>
     </section>
 
-    <!-- Отзывы -->
+    <!-- БЛОК 4: отзывы -->
     <section class="section" id="reviews">
       <h2>Отзывы</h2>
       <form id="reviewForm">
@@ -84,11 +84,8 @@
       </form>
       <div id="reviewList"></div>
     </section>
-
   </div>
 
-  <!-- Firebase и JS -->
-  <script type="module" src="script.js"></script>
-
+  <script src="script.js" type="module"></script>
 </body>
 </html>
